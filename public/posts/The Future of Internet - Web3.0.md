@@ -1,0 +1,1 @@
+Let's cut to the chase here. It's 2020, economy just took a big hit, a deadly virus is rampant around the world and it turns out Facebook was stealing your data.

@@ -1,0 +1,29 @@
+{
+  "name": "mindmatrix",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "babel-runtime": "^6.26.0",
+    "buefy": "^0.8.15",
+    "core-js": "^3.6.4",
+    "prismjs": "^1.20.0",
+    "vue": "^2.6.11",
+    "vue-markdown": "^2.2.4"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.3.0",
+    "@vue/cli-service": "^4.3.0",
+    "less": "^3.0.4",
+    "less-loader": "^5.0.0",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "description": "## Project setup ``` npm install ```",
+  "main": "babel.config.js",
+  "author": "",
+  "license": "MIT"
+}
