@@ -2,7 +2,9 @@
 
 As the demands to reform our current technology can be seen to be mentioned at various talks, interviews and discussions, we are also at the confluence of eras of two different versions of the internet that will push us to our destiny. In a 2018 [TED talk](https://youtu.be/xHHb7R3kx40), historian **Yuval Noah Harrari** told us how our personal data on the internet can fuel up a fascist government. The broad changes that the Web 3.0 is expected to bring to the industry of information sharing and the method of will be a shower of boon to the users and developers of the coming generation.
 
-<iframe width="697" height="392" src="https://www.youtube.com/embed/xHHb7R3kx40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div style="margin: auto; text-align:center;">
+  <iframe width="640" height="480" src="https://www.youtube.com/embed/xHHb7R3kx40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen><iframe>
+</div>
 
 ## The Need for a Change
 
