@@ -1,5 +1,20 @@
-# mindmatrix.github.io
+# mind-matrix
 
-Hi, folks! So a little background on this - I was bored during my summer vacation, which was such joyful this year - 2020 :) and I decided to dedicate my precious time into creating this little personal blog. The speciality about this blog is that it is accompanied by a tool which allows me to post and edit articles directly from the github repo using the Github API. In addition, it boasts an IPFS endpoint along with the normal Github Pages endpoint. I just wanted to play around with the Web 3.0 protocols and what better way than to make a blog! So, enjoy.
+## Build Setup
 
-Link: https://mind-matrix.github.io/
+```bash
+# install dependencies
+$ npm install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
+```
+
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

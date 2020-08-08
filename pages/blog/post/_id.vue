@@ -1,0 +1,58 @@
+<template>
+    <v-container fluid>
+        <article>
+            <h1 class="text-center">{{ article.title }}</h1>
+            <v-subheader class="d-block text-right">
+                Published: {{ new Date(article.updatedAt).toLocaleDateString() }}
+            </v-subheader>
+            <outline :links="article.toc" v-if="article.outline" />
+            <nuxt-content :document="article" />
+        </article>
+    </v-container>
+</template>
+
+<script>
+import Outline from '~/components/Outline'
+
+export default {
+    components: {
+        Outline
+    },
+    async asyncData ({ route, $content }) {
+        const articles = await $content('articles').where({ slug: route.params.id }).limit(1).fetch();
+        return {
+            article: articles[0]
+        };
+    },
+    head() {
+        return {
+            title: this.article.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.article.description
+                },
+                {
+                    hid: 'og:title',
+                    name: 'og:title',
+                    content: this.article.title
+                },
+                {
+                    hid: 'og:description',
+                    name: 'og:description',
+                    content: this.article.description
+                },
+                {
+                    hid: 'og:image',
+                    name: 'og:image',
+                    content: this.article.cover
+                },
+            ]
+        }
+    },
+    mounted() {
+        console.log(this.article);
+    }
+}
+</script>
