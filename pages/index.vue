@@ -45,15 +45,21 @@
 <script>
 export default {
   async asyncData({ $axios, $content }) {
-    let response = await $axios.$get('https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist&type=single', null, {
-      responseType: 'json'
-    });
-    let joke = response.joke;
     let articles = await $content('articles').sortBy('createdAt', 'desc').limit(3).only(['title','slug','description','cover','createdAt']).fetch();
     return {
-      articles,
-      joke
+      articles
     };
+  },
+  data() {
+    return {
+      joke: null
+    };
+  },
+  async mounted() {
+    let response = await this.$axios.$get('https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist&type=single', null, {
+      responseType: 'json'
+    });
+    this.joke = response.joke;
   }
 }
 </script>
