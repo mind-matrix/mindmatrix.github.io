@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      joke: null
+      joke: 'Dad jokes loading...'
     };
   },
   async mounted() {
