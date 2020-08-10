@@ -21,7 +21,10 @@
               <div class="d-flex flex-no-wrap justify-space-between">
                 <div>
                   <v-card-title class="headline" v-text="article.title"></v-card-title>
-                  <v-card-subtitle v-text="article.description"></v-card-subtitle>
+                  <v-card-subtitle>
+                    {{ new Date(article.createdAt).toLocaleDateString() }}
+                  </v-card-subtitle>
+                  <v-card-text v-text="article.description"></v-card-text>
                 </div>
                 <v-avatar
                   class="ma-3"
@@ -37,22 +40,49 @@
       </v-col>
       <v-col cols="12" md="6">
         Or, take a look at some of my projects.
+        <client-only>
+            <v-row>
+                <v-col cols="12" v-for="(repo, index) in repos" :key="index">
+                    <github-repo :repo="repo" />
+                </v-col>
+            </v-row>
+        </client-only>
+      </v-col>
+      <v-col cols="6" class="d-block mx-auto">
+        Also, see some of my most recent 3D artwork.
+            <v-list-item v-for="(art, index) in arts" :to="`/art/post/${art.slug}`" :key="index">
+                <v-list-item-avatar size="150">
+                    <v-img :src="art.cover" />
+                </v-list-item-avatar>
+                <v-list-item-content class="d-none d-md-flex text-left">
+                    <v-list-item-title class="font-weight-bold">
+                        {{ art.title }}
+                    </v-list-item-title>
+                    {{ art.description }}
+                </v-list-item-content>
+            </v-list-item>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+
+const REPOS = require('~/assets/repos.json');
+
 export default {
   async asyncData({ $axios, $content }) {
     let articles = await $content('articles').sortBy('createdAt', 'desc').limit(3).only(['title','slug','description','cover','createdAt']).fetch();
+    let arts = await $content('art').sortBy('createdAt', 'desc').limit(3).only(['title','slug','cover','description']).fetch();
     return {
-      articles
+      articles,
+      arts
     };
   },
   data() {
     return {
-      joke: 'Dad jokes loading...'
+      joke: 'Dad jokes loading...',
+      repos: []
     };
   },
   async mounted() {
@@ -63,6 +93,15 @@ export default {
       this.joke = response.joke;
     } catch (e) {
       this.joke = "404 - Joke not found :("
+    }
+
+    let repos = await this.$axios.$get('https://api.github.com/users/mind-matrix/repos?sort=created&direction=desc');
+    for (let i=0; i < repos.length; i++) {
+      if (REPOS.includes(repos[i].full_name)) {
+        this.repos.push(repos[i]);
+        if (this.repos.length === 3)
+          break;
+      }
     }
   }
 }

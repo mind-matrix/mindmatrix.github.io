@@ -10,8 +10,40 @@
                             <p>
                                 Hi, I am Sagnik. I'll break the ice. A little bit about myself - I love to spend time with family and friends. I also happen to be a self-taught programming enthusiast. My primary interests are Web Development and AI and the bridge between the two. I am currently pursuing B.Tech. in Computer Science and Engineering at the National Institute of Technology. I am hoping to study AI in the near future. I'd love to hear from you too. 
                             </p>
+                            <v-divider />
+                            <v-list>
+                                <v-list-item>
+                                    <v-list-item-avatar>
+                                        <v-icon>
+                                            mdi-phone
+                                        </v-icon>
+                                    </v-list-item-avatar>
+                                    <v-list-item-content>
+                                        +917005878172
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-avatar>
+                                        <v-icon color="green">
+                                            mdi-whatsapp
+                                        </v-icon>
+                                    </v-list-item-avatar>
+                                    <v-list-item-content>
+                                        +917005878172
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-avatar>
+                                        <v-icon color="red">
+                                            mdi-gmail
+                                        </v-icon>
+                                    </v-list-item-avatar>
+                                    <v-list-item-content>
+                                        sagnikmodak1118@gmail.com
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-list>
                             <p>
-                                <a href="https://twitter.com/sagnik_modak?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-lang="en" data-show-count="false">Follow @sagnik_modak</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                                 <github-button href="https://github.com/sponsors/mind-matrix" data-icon="octicon-heart" data-size="large" aria-label="Sponsor on GitHub">Sponsor</github-button>
                                 <github-button href="https://github.com/mind-matrix" data-size="large" aria-label="Follow on GitHub">Follow</github-button>
                             </p>

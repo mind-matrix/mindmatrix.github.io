@@ -3,7 +3,7 @@
         <article>
             <h1 class="text-center">{{ article.title }}</h1>
             <v-subheader class="d-block text-right">
-                Published: {{ new Date(article.updatedAt).toLocaleDateString() }}
+                Published: {{ new Date(article.createdAt).toLocaleDateString() }}
             </v-subheader>
             <outline :links="article.toc" v-if="article.outline" />
             <nuxt-content :document="article" />
@@ -56,3 +56,29 @@ export default {
     }
 }
 </script>
+
+<style>
+.nuxt-content img {
+    display: block;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+.nuxt-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+}
+.nuxt-content td, .nuxt-content th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.nuxt-content th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--v-primary-base);
+    color: white;
+}
+</style>
