@@ -70,7 +70,7 @@ export default {
             this.scene.add(gltf.scene);
         }, (xhr) => {
             this.progress = xhr.loaded / xhr.total * 100;
-            if (this.progress === 100) {
+            if (this.progress >= 100) {
                 this.loaded = true;
             }
         }, (error) => {
