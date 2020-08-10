@@ -37,6 +37,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    { src: '~/plugins/vue-babylonjs.js', mode: 'client' }
   ],
   /*
   ** Auto import components
@@ -95,5 +96,6 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    transpile: ['three', 'vue-github-button']
   }
 }

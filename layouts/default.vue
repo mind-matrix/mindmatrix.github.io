@@ -64,6 +64,13 @@
 export default {
   head() {
     return {
+      meta: [
+        {
+          hid: 'theme-color',
+          name: 'theme-color',
+          content: '#ffffff'
+        }
+      ],
       link: [
         {
           rel: 'apple-touch-icon',
@@ -107,6 +114,11 @@ export default {
           icon: 'mdi-flask-outline',
           title: 'Lab',
           to: '/lab'
+        },
+        {
+          icon: 'mdi-brush',
+          title: 'Art',
+          to: '/art'
         },
         {
           icon: 'mdi-help-circle',

@@ -1,6 +1,12 @@
 <template>
     <v-container fluid>
-        Lab.
+        <v-card>
+            <v-card-title>Lab</v-card-title>
+            <v-card-subtitle>A shelf for my weird experiments.</v-card-subtitle>
+            <v-card-text>
+                
+            </v-card-text>
+        </v-card>
     </v-container>
 </template>
 

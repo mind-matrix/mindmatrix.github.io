@@ -56,10 +56,14 @@ export default {
     };
   },
   async mounted() {
-    let response = await this.$axios.$get('https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist&type=single', null, {
-      responseType: 'json'
-    });
-    this.joke = response.joke;
+    try {
+      let response = await this.$axios.$get('https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist&type=single', null, {
+        responseType: 'json'
+      });
+      this.joke = response.joke;
+    } catch (e) {
+      this.joke = "404 - Joke not found :("
+    }
   }
 }
 </script>
