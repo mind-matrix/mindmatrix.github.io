@@ -66,6 +66,11 @@ export default {
     return {
       meta: [
         {
+          hid: 'google-site-verification',
+          name: 'google-site-verification',
+          content: 'jG0Ke4b9LviBTWijok6ztz4QxRc9qdnKFpKo0-CKqHM'
+        },
+        {
           hid: 'theme-color',
           name: 'theme-color',
           content: '#ffffff'
