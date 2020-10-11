@@ -49,6 +49,7 @@ export default {
   */
   buildModules: [
     '@nuxtjs/vuetify',
+    '@nuxtjs/svg'
   ],
   /*
   ** Nuxt.js modules
@@ -59,6 +60,7 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
+    '@nuxtjs/sitemap',
   ],
   /*
   ** Axios module configuration
@@ -92,6 +94,19 @@ export default {
           success: colors.green.accent3
         }
       }
+    }
+  },
+  sitemap: {
+    hostname: 'https://mind-matrix.github.io',
+    gzip: true,
+    routes: async () => {
+      const { $content } = require('@nuxt/content');
+      const articles = await $content('articles').fetch();
+      const arts = await $content('art').fetch();
+      return [
+        ...articles.map((article) => ({ url: `/blog/post/${article.slug}`, priority: 0.8, lastmod: article.updatedAt })),
+        ...arts.map((art) => ({ url: `/art/post/${art.slug}`, priority: 0.8, lastmod: art.updatedAt }))
+      ];
     }
   },
   /*
