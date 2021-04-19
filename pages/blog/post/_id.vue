@@ -58,6 +58,16 @@ export default {
 </script>
 
 <style>
+code {
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+.code.output {
+    display: block;
+    font-family: monospace;
+    font-size: 12.24px;
+    color: grey !important;
+}
 .nuxt-content img {
     display: block;
     width: 100%;
