@@ -3,7 +3,7 @@ title: Quadratic Deep Networks in Keras
 series: ML Hacks
 author: Sagnik Modak
 outline: true
-cover: https://res cloudinary com/mind-matrix/image/upload/v1618866682/quad-perceptron_dyuxrn png
+cover: https://res.cloudinary.com/mind-matrix/image/upload/v1618866682/quad-perceptron_dyuxrn.png
 description: Dump your boring Dense Layers for the cool new Quadratic Dense Layers 
 ---
 
