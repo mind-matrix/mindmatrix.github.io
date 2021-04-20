@@ -1,0 +1,1 @@
+window.__NUXT__={staticAssetsBase:"\u002F_nuxt\u002Fstatic\u002F1618879765",layout:"default",error:null,serverRendered:true,routePath:"\u002Fblog\u002Fpost\u002Fleveraging-ipfs-to-host-a-truely-distributed-website",config:{content:{dbHash:"9aca4ae4"}}};

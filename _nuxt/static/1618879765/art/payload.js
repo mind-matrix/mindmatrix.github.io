@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/art", (function(a){return {data:[{arts:[{slug:a,description:"A low-poly table made in Blender.",title:a,cover:"\u002Fart\u002Ftable.png"},{slug:"Low-Poly Pen Stand",description:"A low-poly pen stand made in Blender.",title:"Low-Poly Penstand",cover:"\u002Fart\u002Fpenstand.png"}]}],fetch:[],mutations:void 0}}("Low-Poly Table")));
