@@ -55,47 +55,47 @@ which is implemented in code as below -
 
 ```python
 import tensorflow as tf
-from tensorflow keras layers import Layer
-from tensorflow python eager import context
-from tensorflow keras import initializers, activations
+from tensorflow.keras layers import Layer
+from tensorflow.python eager import context
+from tensorflow.keras import initializers, activations
 
 class QuadDense(Layer):
     def __init__(self, units, activation=None, **kwargs):
-        self units = int(units) if not isinstance(units, int) else units
-        self activation = activations get(activation)
-        super(QuadDense, self) __init__(**kwargs)
+        self.units = int(units) if not isinstance(units, int) else units
+        self.activation = activations.get(activation)
+        super(QuadDense, self).__init__(**kwargs)
     def build(self, input_shape):
         last_dim = input_shape[-1]
-        self w_r = self add_weight(shape=[last_dim, self units], initializer='normal', name='w_r', trainable=True)
-        self w_g = self add_weight(shape=[last_dim, self units], initializer='normal', name='w_g', trainable=True)
-        self w_b = self add_weight(shape=[last_dim, self units], initializer='normal', name='w_b', trainable=True)
-        self b_r = self add_weight(shape=[self units,], initializer='normal', name='b_r', trainable=True)
-        self b_g = self add_weight(shape=[self units,], initializer='normal', name='b_g', trainable=True)
-        self c = self add_weight(shape=[self units,], initializer='normal', name='c', trainable=True)
-        self built = True
+        self.w_r = self.add_weight(shape=[last_dim, self.units], initializer='normal', name='w_r', trainable=True)
+        self.w_g = self.add_weight(shape=[last_dim, self.units], initializer='normal', name='w_g', trainable=True)
+        self.w_b = self.add_weight(shape=[last_dim, self.units], initializer='normal', name='w_b', trainable=True)
+        self.b_r = self.add_weight(shape=[self.units,], initializer='normal', name='b_r', trainable=True)
+        self.b_g = self.add_weight(shape=[self.units,], initializer='normal', name='b_g', trainable=True)
+        self.c = self.add_weight(shape=[self.units,], initializer='normal', name='c', trainable=True)
+        self.built = True
   
     def apply_weight(self, x, w):
-        rank = x shape rank
+        rank = x.shape.rank
         if rank == 2 or rank is None:
-            if isinstance(x, tf sparse SparseTensor):
-                outputs = tf sparse sparse_dense_matmul(x, w)
+            if isinstance(x, tf.sparse.SparseTensor):
+                outputs = tf.sparse.sparse_dense_matmul(x, w)
             else:
-                outputs = tf linalg matmul(x, w)
+                outputs = tf.linalg.matmul(x, w)
         else:
-            outputs = tf tensordot(x, w, [[rank - 1], [0]])
-            if not context executing_eagerly():
-                shape = x shape as_list()
-                output_shape = shape[:-1] + [w shape[-1]]
-                outputs set_shape(output_shape)
+            outputs = tf.tensordot(x, w, [[rank - 1], [0]])
+            if not context.executing_eagerly():
+                shape = x.shape.as_list()
+                output_shape = shape[:-1] + [w.shape[-1]]
+                outputs.set_shape(output_shape)
         return outputs
 
     def call(self, x):
-        x_r = self apply_weight(x, self w_r) + self b_r
-        x_g = self apply_weight(x, self w_g) + self b_g
-        x_b = self apply_weight(x**2, self w_b)
-        x = tf multiply(x_r, x_g) + x_b + self c
-        if not (self activation is None):
-            x = self activation(x)
+        x_r = self.apply_weight(x, self.w_r) + self.b_r
+        x_g = self.apply_weight(x, self.w_g) + self.b_g
+        x_b = self.apply_weight(x**2, self.w_b)
+        x = tf.multiply(x_r, x_g) + x_b + self.c
+        if not (self.activation is None):
+            x = self.activation(x)
         return x
 ```
 
@@ -109,23 +109,23 @@ First we will load the dataset into memory.
 
 
 ```python
-import matplotlib pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from sklearn metrics import accuracy_score, precision_score, recall_score
-from sklearn model_selection import train_test_split
-from tensorflow keras import layers, losses, Model, Input
-from tensorflow keras datasets import fashion_mnist
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.model_selection import train_test_split
+from tensorflow.keras import layers, losses, Model, Input
+from tensorflow.keras.datasets import fashion_mnist
 
-(x_train, _), (x_test, _) = fashion_mnist load_data()
+(x_train, _), (x_test, _) = fashion_mnist.load_data()
 
-x_train = x_train astype('float32') / 255 
-x_test = x_test astype('float32') / 255 
+x_train = x_train.astype('float32') / 255 
+x_test = x_test.astype('float32') / 255 
 
 print ('############ DATASET: fashion_mnist ############')
-print ('train shape: ', x_train shape)
-print ('test shape: ', x_test shape)
+print ('train shape: ', x_train.shape)
+print ('test shape: ', x_test.shape)
 ```
 
 <div class="code output">
@@ -155,25 +155,25 @@ The following code block is the typical AutoEncoder model based on the classical
 ```python
 class DenseAutoEncoder(Model):
     def __init__(self, latent_dim):
-        super(DenseAutoEncoder, self) __init__()
-        self latent_dim = latent_dim   
-        self encoder = tf keras Sequential([
-          layers Flatten(),
-          layers Dense(latent_dim, activation='relu'),
+        super(DenseAutoEncoder, self).__init__()
+        self.latent_dim = latent_dim   
+        self.encoder = tf.keras.Sequential([
+          layers.Flatten(),
+          layers.Dense(latent_dim, activation='relu'),
         ])
-        self decoder = tf keras Sequential([
-          layers Dense(784, activation='sigmoid'),
-          layers Reshape((28, 28))
+        self.decoder = tf.keras.Sequential([
+          layers.Dense(784, activation='sigmoid'),
+          layers.Reshape((28, 28))
         ])
 
     def call(self, x):
-        encoded = self encoder(x)
-        decoded = self decoder(encoded)
+        encoded = self.encoder(x)
+        decoded = self.decoder(encoded)
         return decoded
 
 dense_autoencoder = DenseAutoEncoder(LATENT_DIM)
-dense_autoencoder compile(optimizer='adam', loss=losses MeanSquaredError(), metrics=['accuracy'])
-dense_ae_hist = dense_autoencoder fit(x_train, x_train,
+dense_autoencoder.compile(optimizer='adam', loss=losses.MeanSquaredError(), metrics=['accuracy'])
+dense_ae_hist = dense_autoencoder.fit(x_train, x_train,
                                         epochs=EPOCHS,
                                         shuffle=True,
                                         batch_size=BATCH_SIZE,
@@ -188,25 +188,25 @@ Now let us run the same task but with another AutoEncoder model which is essenti
 ```python
 class QuadDenseAutoEncoder(Model):
     def __init__(self, latent_dim):
-        super(QuadDenseAutoEncoder, self) __init__()
-        self latent_dim = latent_dim   
-        self encoder = tf keras Sequential([
-          layers Flatten(),
+        super(QuadDenseAutoEncoder, self).__init__()
+        self.latent_dim = latent_dim   
+        self.encoder = tf.keras.Sequential([
+          layers.Flatten(),
           QuadDense(latent_dim, activation='relu'),
         ])
-        self decoder = tf keras Sequential([
+        self.decoder = tf.keras.Sequential([
           QuadDense(784, activation='sigmoid'),
-          layers Reshape((28, 28))
+          layers.Reshape((28, 28))
         ])
 
     def call(self, x):
-        encoded = self encoder(x)
-        decoded = self decoder(encoded)
+        encoded = self.encoder(x)
+        decoded = self.decoder(encoded)
         return decoded
 
 quad_dense_autoencoder = QuadDenseAutoEncoder(LATENT_DIM)
-quad_dense_autoencoder compile(optimizer='adam', loss=losses MeanSquaredError(), metrics=['accuracy'])
-quad_ae_hist = quad_dense_autoencoder fit(x_train, x_train,
+quad_dense_autoencoder.compile(optimizer='adam', loss=losses.MeanSquaredError(), metrics=['accuracy'])
+quad_ae_hist = quad_dense_autoencoder.fit(x_train, x_train,
                                             epochs=EPOCHS,
                                             batch_size=BATCH_SIZE,
                                             shuffle=True,
@@ -222,26 +222,26 @@ Let us compare the results of the classical Dense Layer-based AutoEncoder and th
 from matplotlib import pyplot as plt
 %matplotlib inline
 
-fig, axs = plt subplots(2, 1, figsize=(8,10))
+fig, axs = plt.subplots(2, 1, figsize=(8,10))
 
-axs[0] plot(dense_ae_hist history['val_accuracy'])
-axs[0] plot(quad_ae_hist history['val_accuracy'])
-axs[0] set_title('Comparison of Model Validation Accuracy')
-axs[0] set(xlabel='epoch', ylabel='accuracy')
+axs[0].plot(dense_ae_hist.history['val_accuracy'])
+axs[0].plot(quad_ae_hist.history['val_accuracy'])
+axs[0].set_title('Comparison of Model Validation Accuracy')
+axs[0].set(xlabel='epoch', ylabel='accuracy')
 
-axs[1] plot(dense_ae_hist history['val_loss'])
-axs[1] plot(quad_ae_hist history['val_loss'])
-axs[1] set_title('Comparison of Model Validation Loss (MSE)')
-axs[1] set(xlabel='epoch', ylabel='loss')
+axs[1].plot(dense_ae_hist.history['val_loss'])
+axs[1].plot(quad_ae_hist.history['val_loss'])
+axs[1].set_title('Comparison of Model Validation Loss (MSE)')
+axs[1].set(xlabel='epoch', ylabel='loss')
 
-axs[0] legend(['Accuracy: Dense AutoEncoder', 'Accuracy: Quadratic Dense AutoEncoder'], loc='upper left')
-axs[0] legend(['MSE Loss: Dense AutoEncoder', 'MSE Loss: Quadratic Dense AutoEncoder'], loc='upper left')
+axs[0].legend(['Accuracy: Dense AutoEncoder', 'Accuracy: Quadratic Dense AutoEncoder'], loc='upper left')
+axs[0].legend(['MSE Loss: Dense AutoEncoder', 'MSE Loss: Quadratic Dense AutoEncoder'], loc='upper left')
 
-plt show()
+plt.show()
 ```
 
 
-![png](https://res.cloudinary.com/mind-matrix/image/upload/v1618864813/quad-deep-nn_y8mumo.png)
+![results](https://res.cloudinary.com/mind-matrix/image/upload/v1618864813/quad-deep-nn_y8mumo.png)
 
 
 It is clear that the Quadratic Dense Layer-based Auto-Encoder beat the classical AutoEncoder by a significant margin. In fact, for almost all models (and especially the Auto-Encoder models since they heavily rely on the Dense Layer) the Quadratic Dense Layer outperforms the classical Dense Layer.
