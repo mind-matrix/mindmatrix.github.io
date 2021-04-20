@@ -8,9 +8,11 @@ description: Dump your boring Dense Layers for the cool new Quadratic Dense Laye
 ---
 
 
+![quad_perceptron](https://res.cloudinary.com/mind-matrix/image/upload/v1618866682/quad-perceptron_dyuxrn.png)
+
 The past couple of months I have been scrimmaging through dozens of papers for the final research project of my degree. During this time, I have happened across several papers most of which were not directly related to my project but have kindled my interest. So I went ahead and implemented them. Some of these I found really informative  In this series of posts shall share all of these small secrets that I have discovered and any others I may discover in the future, that may be of help to you for your next big project. Today's topic is **Quadratic Deep Networks** 
 
-# A Gentle Recap of Neural Networks
+## A Gentle Recap of Neural Networks
 
 The idea of Neural Networks is contrived from the biological process by which our Nervous System reacts to impulses from the external environment. An impulse triggers a neuro-chemical reaction in the axon of the neuron which then decides whether to transmit a modified signal to the next neuron (fire) or not (not fire). This binary rule of either firing or not firing based on several factors is called the *All or None* rule. Similar to a biological neuron, a **perceptron** (unit of an Artifical Neural Network) is composed of some weights <span class="math math-inline">w_i</span> and biases <span class="math math-inline">b_i</span> that determine how the input signal <span class="math math-inline">x_i</span> is modified and finally an activation function <span class="math math-inline">\phi</span> that decides whether or not to fire the modified signal
 
@@ -20,7 +22,7 @@ s_i = \phi(w_i * x_i + b_i)
 
 However, unlike a biological neural network the purpose of an artifical neural network is not to model the human nervous system but to act as a function approximator. The analogy comes from the fact that in a way, the human cognition system can be thought of as being just one giant, enormously powerful and complex function approximator. But that is for your CS or philosophy professor to explain so I'll leave it at that.
 
-# Shortcoming of the traditional neuron
+## Shortcoming of the traditional neuron
 
 Although the idea of a neuron stems from the biological make up of our being, it is not used as such. We mostly use neural networks for classifying pictures of cats and dogs or predicting the winningest choices for your next Dream 11 Team (that's cheating btw). Underneath the pretty looking hood, it's all just math-y things with math-y equations and formulas. So to understand how a neuron works, we have to look at what a single neuron is doing. Suppose you have to model an equation <span class="math math-inline">f(x) = 10x + 2</span>. What would be the most optimal weights and biases by which you can model the given equation and how many neurons do you need? Easy, right? Just 1 neuron and the weights and biases are <span class="math math-inline">w_1 = 10</span> and <span class="math math-inline">b_1 = 2</span> so the final model <span class="math math-inline">g(x)</span> for <span class="math math-inline">f(x)</span> should stands as,
 
@@ -30,7 +32,7 @@ g(x) = w_1x + b_1 = f(x)
 
 Now imagine a more complex equation, say a quadratic equation or a cubic equation. It should be evident that a single neuron cannot effectively model such an equation. In fact, it has been proven that the *classical model of perceptron*, which we have been following, fails spectacularly when it comes to even simple logical equations like the OR Gate or the NOR gate. The reason is apparent once you realise that the neuron only models equations that bear resemble to the equation for a line. It has also been proved beyond doubt that for modeling more complex tasks a **Deep Neural Network** is the way to go. A Deep Neural Network is basically just a stack of many layers each of which in turn contains many neurons. This has been shown to be effective in a large number of tasks ranging from modeling mathematical equations to driving cars automatically.
 
-# Quadratic Model of Perceptron
+## Quadratic Model of Perceptron
 
 The Quadratic Model of Perceptron is a novel model that improves upon the classical perceptron model. It is introduced in the paper **Universal Approximation with Quadratic Deep Networks** (Fan et al , 2018). In this blog post, we will implement this model using the Tensorflow 2.4.1 Keras library. Note that this is the Tensorflow version that has been used to run the code blocks below but almost any version from the past couple of years should be good to go.
 
@@ -97,11 +99,11 @@ class QuadDense(Layer):
         return x
 ```
 
-# Example Dataset - The MNIST Fashion Dataset
+## Example Dataset - The MNIST Fashion Dataset
 
 The MNIST Fashion Dataset is a particularly hard dataset to model. We will use the AutoEncoder Architecture to design a model for this dataset. This part is not written by me and infact, is taken from the Keras Blog as is with some minor modifications.
 
-## Loading the Dataset
+### Loading the Dataset
 
 First we will load the dataset into memory.
 
@@ -134,7 +136,7 @@ train shape:  (60000, 28, 28)
 test shape:  (10000, 28, 28)
 </div>
 
-## Defining Hyper-parameters
+### Defining Hyper-parameters
 
 Then we will define some Hyper-parameters. The **LATENT_DIM** hyper-parameter represents the dimensionality of the encoded input representation and can chosen arbitrarily  We choose to use the **LATENT_DIM** value, and values of all the other hyper-parameters, as prescribed in the official blog post.
 
@@ -145,7 +147,7 @@ EPOCHS = 10
 BATCH_SIZE = 32
 ```
 
-## Classical Dense Layer-based AutoEncoder
+### Classical Dense Layer-based AutoEncoder
 
 The following code block is the typical AutoEncoder model based on the classical model of the perceptron. The Dense layer is a Keras Layer corresponding to the classical version of our QuadDense implementation.
 
@@ -178,7 +180,7 @@ dense_ae_hist = dense_autoencoder fit(x_train, x_train,
                                         validation_data=(x_test, x_test))
 ```
 
-## Quadratic Dense Layer-based AutoEncoder
+### Quadratic Dense Layer-based AutoEncoder
 
 Now let us run the same task but with another AutoEncoder model which is essentially the same as the above model except that instead of the classical Dense layers, we use the QuadDense Layer that we have implemented before.
 
@@ -211,7 +213,7 @@ quad_ae_hist = quad_dense_autoencoder fit(x_train, x_train,
                                             validation_data=(x_test, x_test))
 ```
 
-## Comparison of Results
+### Comparison of Results
 
 Let us compare the results of the classical Dense Layer-based AutoEncoder and the novel QuadDense Layer-based AutoEncoder.
 
@@ -244,7 +246,7 @@ plt show()
 
 It is clear that the Quadratic Dense Layer-based Auto-Encoder beat the classical AutoEncoder by a significant margin. In fact, for almost all models (and especially the Auto-Encoder models since they heavily rely on the Dense Layer) the Quadratic Dense Layer outperforms the classical Dense Layer.
 
-# Conclusion
+## Conclusion
 
 It is worth mentioning that this is not true, however, for all cases. In some cases where the classical Dense Neural Network is already sufficiently capable of modeling the target dataset, the Quadratic Dense Layer provides almost insignificant or sometimes no improvement. But in no cases have I found that using the Quadratic Dense Layer reduces the accuracy or increases the loss. In short, try the Quadratic Dense Layers when your target dataset is fairly complex and your model modest-to-heavily relies on Dense Layers. This may give you an added boost to your model in the best case and show no improvements in the worst case.
 
