@@ -1,0 +1,53 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import BlogList from '../components/BlogList.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header title={SITE_TITLE} />
+		<main>
+			<h1>🚀 Deploying Experiments and Ideas</h1>
+			<p>
+				<img src="/logo.png" alt="logo" style="display: block; margin: 0 auto;">
+			</p>
+			<p>
+				Hi there! I'm glad you decided to spend some time here.
+			</p>
+			<h2>
+				Articles
+			</h2>
+			<p>
+				Explore some awesome discoveries, tips and tricks on all things code!
+				<BlogList limit={5} />
+			</p>
+			<h2>Publications</h2>
+			<p>
+				This is a list of my publication(s).
+				<ul class="min">
+					<li>
+						<time datetime="Dec 22, 2021">Dec 22, 2021</time>
+						<a href="https://ieeexplore.ieee.org/document/9641626">
+							Improving performance of Recurrent Neural Networks for Question-Answering with Attention-based Context Reduction
+						</a>
+					</li>
+				</ul>
+			</p>
+			<!-- <h2>Projects</h2>
+			<p>
+				Find out more about some of my personal projects.
+				<ul class="min">
+					<li></li>
+				</ul>
+			</p> -->
+		</main>
+		<Footer />
+	</body>
+</html>

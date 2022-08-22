@@ -1,0 +1,27 @@
+---
+export interface BlogListProps {
+    limit?: number
+}
+
+const { limit = -1 } = Astro.props as BlogListProps;
+const allPosts = (await Astro.glob('/src/pages/blog/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.created).valueOf() - new Date(a.frontmatter.created).valueOf()
+);
+const posts = (limit > -1) ? allPosts.slice(0, limit) : allPosts;
+---
+<content>
+    <ul class="min">
+        {posts.map((post) => (
+            <li>
+                <time datetime={post.frontmatter.created}>
+                    {new Date(post.frontmatter.created).toLocaleDateString('en-us', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                    })}
+                </time>
+                <a href={post.url}>{post.frontmatter.title}</a>
+            </li>
+        ))}
+    </ul>
+</content>
