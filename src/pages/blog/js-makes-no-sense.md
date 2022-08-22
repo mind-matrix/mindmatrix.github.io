@@ -2,6 +2,7 @@
 layout: "../../layouts/BlogPost.astro"
 title: JavaScript makes no sense. And that's awesome!
 created: 2020-10-11
+pubDate: "Oct 11, 2020"
 cover: https://res.cloudinary.com/mind-matrix/image/upload/v1602433296/wwjs_pp6lev.png
 outline: true
 description: Find out why JavaScript is often blamed by developers to make absolutely no sense and how we can exploit the weird way JS code behaves to create some interesting looking code.

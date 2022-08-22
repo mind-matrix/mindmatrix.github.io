@@ -2,7 +2,8 @@
 layout: "../layouts/StaticPost.astro"
 title: "About me"
 description: "Sagnik Modak"
-updated: "August 08 2022"
+pubDate: "Aug 08, 2022"
+updated: "Aug 08 2022"
 heroImage: "/sagnik.png"
 ---
 

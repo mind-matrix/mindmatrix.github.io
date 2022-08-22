@@ -1,6 +1,7 @@
 ---
 layout: "../layouts/BlogPost.astro"
 title: "Downloads"
+pubDate: "Aug 08, 2022"
 description: "Sagnik Modak"
 ---
 

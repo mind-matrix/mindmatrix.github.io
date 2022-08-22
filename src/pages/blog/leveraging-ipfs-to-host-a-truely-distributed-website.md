@@ -3,6 +3,7 @@ layout: "../../layouts/BlogPost.astro"
 title: Leveraging IPFS to host a truely distributed website
 author: Sagnik Modak
 created: 2021-04-20
+pubDate: "Mar 20, 2021"
 outline: true
 cover: https://res.cloudinary.com/mind-matrix/image/upload/v1597059056/pexels-designecologist-1779487_mruw2n.jpg
 description: See how you can use the power of Web3.0 to host your static websites for no cost with IPFS.

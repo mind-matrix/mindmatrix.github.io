@@ -2,6 +2,7 @@
 layout: "../../layouts/BlogPost.astro"
 title: Compression
 created: 2017-12-28
+pubDate: "Dec 28, 2017"
 cover: https://res.cloudinary.com/mind-matrix/image/upload/v1597060221/compression_votoua.jpg
 description: Ranking compression algorithms and Silicon Valley's Pied Piper Compression
 ---

@@ -2,6 +2,7 @@
 layout: "../../layouts/BlogPost.astro"
 title: Automated Lamp With Arduino
 created: 2017-10-31
+pubDate: "Oct 31, 2017"
 cover: https://res.cloudinary.com/mind-matrix/image/upload/v1597060891/blinken_iu5aw6.jpg
 description: Create an automated LED lamp with arduino.
 ---
